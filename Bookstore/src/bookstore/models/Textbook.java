@@ -28,6 +28,7 @@ public class Textbook extends Book {
 		this.level = level;
 		this.institution = institution;
 	}
+	
 	public String getTargetAudience() {
 		return targetAudience;
 	}
@@ -46,8 +47,4 @@ public class Textbook extends Book {
 	public void setInstitution(String institution) {
 		this.institution = institution;
 	}
-	
-	
-	
-	
 }

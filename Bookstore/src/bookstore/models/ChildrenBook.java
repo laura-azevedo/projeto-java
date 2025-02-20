@@ -51,5 +51,5 @@ public class ChildrenBook extends Book {
 	public void setLearningObjective(String learningObjective) {
 		this.learningObjective = learningObjective;
 	}
-
+	
 }
