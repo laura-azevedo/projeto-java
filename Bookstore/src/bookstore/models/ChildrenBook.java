@@ -3,11 +3,11 @@ package bookstore.models;
 import java.util.Date;
 
 /** A children's book is a kind of book written for young readers.
- * They're designed to be educational, with content taiolred to different stages of childhood developemt.
+ * They're designed to be educational, with content tailored to different stages of childhood development.
  * 
- * @field targetAge: the age group the book is intented for, like toddler, child and pre-teen.
+ * @field targetAge: the age group the book is intended for, like toddler, child and pre-teen.
  * @field theme: the main subject of the book, like friendship, adventure or family.
- * @field learningObjective: the educational goal that the book aims to achive, like teaching the importance
+ * @field learningObjective: the educational goal that the book aims to achieve, like teaching the importance
  * of kindness, the concept of collaboration, healthy eating habits etc.
  **/
 public class ChildrenBook extends Book {
