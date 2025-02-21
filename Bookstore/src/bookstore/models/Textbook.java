@@ -1,7 +1,5 @@
 package bookstore.models;
 
-import java.util.Date;
-
 /**A textbook is a type of book used for educational purposes, typically written for a specific
  * subject or academic field and used in universities and schools.
  * They often includes explanations, examples, exercises and other types of content to support learning
@@ -20,10 +18,10 @@ public class Textbook extends Book {
 	
 	public Textbook(
 			String title, String author, String isbn, String genre, String publisher, 
-			Date publishDate, float price, int pageCount, String language, String targetAudience, 
+			float price, int pageCount, String language, String targetAudience, 
 			String level, String institution) {
 		
-		super(title, author, isbn, genre, publisher, publishDate, price, pageCount, language);
+		super(title, author, isbn, genre, publisher, price, pageCount, language);
 		this.targetAudience = targetAudience;
 		this.level = level;
 		this.institution = institution;

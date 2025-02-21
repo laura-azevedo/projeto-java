@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Bookstore {
 
 	public static void main(String[] args) {
-		
+				
 		Scanner scanner = new Scanner(System.in);
 		
 		while (true) {
@@ -21,6 +21,7 @@ public class Bookstore {
 		
 			int option = scanner.nextInt();
 			scanner.nextLine();
+			
 
 			switch (option) {
 			    case 1:

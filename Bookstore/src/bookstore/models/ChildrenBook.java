@@ -1,7 +1,5 @@
 package bookstore.models;
 
-import java.util.Date;
-
 /** A children's book is a kind of book written for young readers.
  * They're designed to be educational, with content tailored to different stages of childhood development.
  * 
@@ -18,10 +16,10 @@ public class ChildrenBook extends Book {
 	
 	public ChildrenBook(
 			String title, String author, String isbn, String genre, String publisher, 
-			Date publishDate, float price, int pageCount, String language, 
+			float price, int pageCount, String language, 
 			String targetAge, String theme, String learningObjective) {
 		
-		super(title, author, isbn, genre, publisher, publishDate, price, pageCount, language);
+		super(title, author, isbn, genre, publisher, price, pageCount, language);
 		this.targetAge = targetAge;
 		this.theme = theme;
 		this.learningObjective = learningObjective;

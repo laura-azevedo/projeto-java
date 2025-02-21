@@ -1,38 +1,44 @@
 package bookstore.models;
 
-import java.util.Date;
+import java.util.UUID;
 
 public abstract class Book {
+	private String bookId;
 	private String title;
 	private String author;
 	private String isbn;
 	private String genre;
 	private String publisher;
-	private Date publishDate;
 	private float price;
 	private int pageCount;
 	private String language;
 	
-	public Book(String title, 
+	public Book(
+			String title, 
 			String author, 
 			String isbn, 
 			String genre, 
 			String publisher, 
-			Date publishDate, 
 			float price,
 			int pageCount, 
 			String language) {
-		
-		super();
+		this.bookId = UUID.randomUUID().toString();
 		this.title = title;
 		this.author = author;
 		this.isbn = isbn;
 		this.genre = genre;
 		this.publisher = publisher;
-		this.publishDate = publishDate;
 		this.price = price;
 		this.pageCount = pageCount;
 		this.language = language;
+	}
+	
+	public String getBookId() {
+		return bookId;
+	}
+
+	public void setBookId(String bookId) {
+		this.bookId = bookId;
 	}
 
 	public String getTitle() {
@@ -75,14 +81,6 @@ public abstract class Book {
 		this.publisher = publisher;
 	}
 
-	public Date getPublishDate() {
-		return publishDate;
-	}
-
-	public void setPublishDate(Date publishDate) {
-		this.publishDate = publishDate;
-	}
-
 	public float getPrice() {
 		return price;
 	}
@@ -121,7 +119,6 @@ public abstract class Book {
 			System.out.println("ISBN: " + isbn);
 			System.out.println("Genre: " + genre);
 			System.out.println("Publisher: " + publisher);
-			System.out.println("Published on: " + publishDate);
 			System.out.println("Price: " + price);
 			System.out.println("Page count: " + pageCount);
 			System.out.println("Language: " + language);
@@ -149,9 +146,6 @@ public abstract class Book {
 				break; 
 			case "publisher": 
 				System.out.println("Publisher: " + publisher); 
-				break; 
-			case "publishDate": 
-				System.out.println("Published on: " + publishDate); 
 				break; 
 			case "pageCount": 
 				System.out.println("Page Count: " + pageCount); 
