@@ -17,11 +17,11 @@ public class Textbook extends Book {
 	
 	
 	public Textbook(
-			String title, String author, String isbn, String genre, String publisher, 
+			int bookId, String title, String author, String isbn, String genre, String publisher, 
 			float price, int pageCount, String language, String targetAudience, 
 			String level, String institution) {
 		
-		super(title, author, isbn, genre, publisher, price, pageCount, language);
+		super(bookId, title, author, isbn, genre, publisher, price, pageCount, language);
 		this.targetAudience = targetAudience;
 		this.level = level;
 		this.institution = institution;

@@ -7,9 +7,9 @@ import bookstore.models.Book;
 public interface BookOperations {
 	
 	void addBook(Book book);
-	void updateBook(String bookId, Book updateBook);
-	void deleteBook(String bookId);
-	Book getBookById(String bookId);
+	void updateBook(int bookId, Book updateBook);
+	void deleteBook(int bookId);
+	Book getBookById(int bookId);
 	void listAllBooks();
 
     List<Book> findByAuthor(String author);
