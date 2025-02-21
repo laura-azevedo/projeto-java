@@ -29,7 +29,7 @@ public class Bookstore {
         bookService.addBook(new ChildrenBook(bookService.idGenerator(), "O segredo da casa amarela", "autor 1", "333", "Classic", "HarperCollins", 18.99f, 192, "English", "pre-teen", "friendship", "kindness"));
         bookService.addBook(new ChildrenBook(bookService.idGenerator(), "Matilda", "autora 2", "444", "Fantasy", "editora xyz", 10.99f, 240, "English", "pre-teen", "intelligence", "love for learning"));
         bookService.addBook(new ChildrenBook(bookService.idGenerator(), "Boa noite", "autora 2", "555", "Fiction", "editora xyz", 9.99f, 32, "German", "toddler", "family", "bedtime routine"));
-**/
+		 **/
 		while (true) {
 			
 			System.out.println("Welcome to Laura's Book Store! Please, choose one of the options below: ");
@@ -72,7 +72,14 @@ public class Bookstore {
 		    		keyPress();
 		    		break;
 	    		case 3:
-	    			System.out.println("updating book.");
+	    			System.out.println("Enter the book ID to update: "); 
+	    			bookId = scanner.nextInt(); scanner.nextLine(); 
+	    			if(bookService.getBookById(bookId) != null) {
+		    			Book updatedBook = createBook(bookId, bookService);
+		    			bookService.updateBook(bookId, updatedBook); 
+	    			} else {
+	    				System.out.println("\nBook not found.");
+	    			}
 	    			keyPress();
 	    			break;
 			    case 4:
@@ -128,7 +135,8 @@ public class Bookstore {
 					case 3 -> bookService.findByGenre(searchTerm); 
 					case 4 -> bookService.findByPublisher(searchTerm); 
 					case 5 -> bookService.findByLanguage(searchTerm); 
-					default -> List.of(); }; 
+					default -> List.of(); 
+					}; 
 						if (results.isEmpty()) 
 							System.out.println("No results.");
 						else 
@@ -159,20 +167,20 @@ public class Bookstore {
 	            
 	        case 2:
 	            book = new ChildrenBook(
-	            		bookService.idGenerator(),
-	            		getInput("Enter the title:"),
-	            		getInput("Enter the author:"),
-	            		getInput("Enter the ISBN:"),
-	            		getInput("Enter the genre:"),
-	            		getInput("Enter the publisher:"),
-	            		getFloatInput("Enter the price:"),
-	            		getIntInput("Enter the page count:"),
-	            		getInput("Enter the language:"),
-	            		getInput("Enter the target audience (toddler, child etc):"),
-	            		getInput("Enter the theme (friendship, adventure etc):"),
-	            		getInput("Enter the learning objective (kindness, collaboration etc):")
-	                );
-	                break;
+            		bookService.idGenerator(),
+            		getInput("Enter the title:"),
+            		getInput("Enter the author:"),
+            		getInput("Enter the ISBN:"),
+            		getInput("Enter the genre:"),
+            		getInput("Enter the publisher:"),
+            		getFloatInput("Enter the price:"),
+            		getIntInput("Enter the page count:"),
+            		getInput("Enter the language:"),
+            		getInput("Enter the target audience (toddler, child etc):"),
+            		getInput("Enter the theme (friendship, adventure etc):"),
+            		getInput("Enter the learning objective (kindness, collaboration etc):")
+                );
+	            break;
 	        default: 
 	        	System.out.println("Invalid book type."); 
 	        	return null;
@@ -183,7 +191,6 @@ public class Bookstore {
 		Scanner scanner = new Scanner(System.in);
 		System.out.println(prompt); 
 		return scanner.nextLine();
-		
 	}
 	
 	private static int getIntInput(String prompt) {
