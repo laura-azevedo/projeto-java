@@ -60,7 +60,8 @@ public class Bookstore {
 			switch (option) {
 			    case 1:
 			    	System.out.println("Select book type (1 for Textbook, 2 for Children Book): "); 
-			    	int bookType = scanner.nextInt(); 
+			    	int bookType = scanner.nextInt();
+			    	scanner.nextLine();
 			    	Book newBook = createBook(bookType, bookService, scanner);
 			    	if (newBook != null) {
 	    			    bookService.addBook(newBook);
@@ -197,17 +198,22 @@ public class Bookstore {
 		    System.out.println("Invalid input. Please enter a valid integer.");
 		    scanner.next();
 		}
-		return scanner.nextInt();
+		int input = scanner.nextInt();
+	    scanner.nextLine();
+		return input;
 	}
 	
 	private static float getFloatInput(String prompt, Scanner scanner) {
-		System.out.println(prompt);
-		while (!scanner.hasNextFloat()) {
-		    System.out.println("Invalid input. Please enter a valid float.");
-		    scanner.next();
-		}
-		return scanner.nextFloat();
+	    System.out.println(prompt);
+	    while (!scanner.hasNextFloat()) {
+	        System.out.println("Invalid input. Please enter a valid float.");
+	        scanner.next();
+	    }
+	    float input = scanner.nextFloat();
+	    scanner.nextLine();
+	    return input;
 	}
+	
 	
 	public static void keyPress() {
 		try {
