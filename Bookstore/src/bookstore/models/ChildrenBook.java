@@ -15,11 +15,11 @@ public class ChildrenBook extends Book {
 	private String learningObjective;
 	
 	public ChildrenBook(
-			String title, String author, String isbn, String genre, String publisher, 
+			int bookId, String title, String author, String isbn, String genre, String publisher, 
 			float price, int pageCount, String language, 
 			String targetAge, String theme, String learningObjective) {
 		
-		super(title, author, isbn, genre, publisher, price, pageCount, language);
+		super(bookId, title, author, isbn, genre, publisher, price, pageCount, language);
 		this.targetAge = targetAge;
 		this.theme = theme;
 		this.learningObjective = learningObjective;

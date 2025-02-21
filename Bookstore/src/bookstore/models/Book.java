@@ -1,9 +1,7 @@
 package bookstore.models;
 
-import java.util.UUID;
-
 public abstract class Book {
-	private String bookId;
+	private int bookId;
 	private String title;
 	private String author;
 	private String isbn;
@@ -14,6 +12,7 @@ public abstract class Book {
 	private String language;
 	
 	public Book(
+			int bookId,
 			String title, 
 			String author, 
 			String isbn, 
@@ -22,7 +21,7 @@ public abstract class Book {
 			float price,
 			int pageCount, 
 			String language) {
-		this.bookId = UUID.randomUUID().toString();
+		this.bookId = bookId;
 		this.title = title;
 		this.author = author;
 		this.isbn = isbn;
@@ -33,14 +32,15 @@ public abstract class Book {
 		this.language = language;
 	}
 	
-	public String getBookId() {
+	
+	public int getBookId() {
 		return bookId;
 	}
 
-	public void setBookId(String bookId) {
+	public void setBookId(int bookId) {
 		this.bookId = bookId;
 	}
-
+ 
 	public String getTitle() {
 		return title;
 	}
@@ -114,6 +114,7 @@ public abstract class Book {
 	
 	public void displayInfo(boolean fullDetails) {
 		if (fullDetails) {
+			System.out.println("Book ID: " + bookId);
 			System.out.println("Title: " + title);
 			System.out.println("Author: " + author);
 			System.out.println("ISBN: " + isbn);
@@ -122,6 +123,7 @@ public abstract class Book {
 			System.out.println("Price: " + price);
 			System.out.println("Page count: " + pageCount);
 			System.out.println("Language: " + language);
+			System.out.println("\n");
 			return;
 		}
 		displayInfo();

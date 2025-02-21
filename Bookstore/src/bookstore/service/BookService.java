@@ -1,46 +1,57 @@
 package bookstore.service;
 
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.HashMap;
+import java.util.ArrayList;
 
 import bookstore.interfaces.BookOperations;
 import bookstore.models.Book;
 
 public class BookService implements BookOperations {
 	
-    private Map<String, Book> books = new HashMap<>();
+    private List<Book> books = new ArrayList<>();
+    
+    private int number = 0;
 
     @Override
     public void addBook(Book book) {
-        books.put(book.getBookId(), book);
-        System.out.println("Book added: " + book.getTitle());
+    	 int bookId = idGenerator();
+    	 book.setBookId(bookId);
+    	 books.add(book);
+    	 System.out.println("Book added: " + book.getTitle());
     }
 
     @Override
-    public void updateBook(String bookId, Book updatedBook) { 
-    	
-    	if(!books.containsKey(bookId)) {
-    		System.out.println("Book not found. ");
-    		return;
+    public void updateBook(int bookId, Book updatedBook) { 
+    	Book book = getBookById(bookId);
+    	if (book == null) { 
+    		System.out.println("Book not found."); 
+    		return; 
     	}
-		books.put(bookId, updatedBook); 
+    	int index = books.indexOf(book); 
+    	books.set(index, updatedBook);
 		System.out.println("Book updated: " + updatedBook.getTitle()); 
 	}
 
     @Override
-    public void deleteBook(String bookId) { 
-    	if(books.remove(bookId) == null) {
+    public void deleteBook(int bookId) {
+    	Book book = getBookById(bookId); 
+    	if (book == null) { 
     		System.out.println("Book not found."); 
-    		return;
-    	}
+    		return; 
+    	} 
+    	books.remove(book);
     	System.out.println("The book was deleted.");
 	}
 
     @Override
-    public Book getBookById(String bookId) {
-    	return books.get(bookId); 
+    public Book getBookById(int bookId) {
+        for (Book book : books) {
+            if (book.getBookId() == bookId) {
+                return book;
+            }
+        }
+        return null;
     }
 
     @Override
@@ -49,41 +60,45 @@ public class BookService implements BookOperations {
     		System.out.println("There are no books available. "); 
     		return;
     	}
-    	books.values().forEach(book -> System.out.println(book.getTitle())); 
+    	books.forEach(book -> book.displayInfo(true));
     }
 
     @Override
     public List<Book> findByAuthor(String author) { 
-    	return books.values().stream()
+    	return books.stream()
     			.filter(book -> book.getAuthor().equalsIgnoreCase(author))
     			.collect(Collectors.toList()); 
     	}
 
 	@Override
     public List<Book> findByGenre(String genre) { 
-    	return books.values().stream()
+    	return books.stream()
     			.filter(book -> book.getGenre().equalsIgnoreCase(genre))
     			.collect(Collectors.toList()); 
     	}
 
 	@Override 
     public List<Book> findByTitle(String title) {
-        return books.values().stream()
+        return books.stream()
                 .filter(book -> book.getTitle().equalsIgnoreCase(title))
                 .collect(Collectors.toList());
     }
 
 	@Override
     public List<Book> findByPublisher(String publisher) {
-        return books.values().stream()
+        return books.stream()
                 .filter(book -> book.getPublisher().equalsIgnoreCase(publisher))
                 .collect(Collectors.toList());
     }
 
 	@Override
     public List<Book> findByLanguage(String language) {
-        return books.values().stream()
+        return books.stream()
                 .filter(book -> book.getLanguage().equalsIgnoreCase(language))
                 .collect(Collectors.toList());
     }
+	
+	public int idGenerator() { 
+		return ++ number; 
+	}
 }
