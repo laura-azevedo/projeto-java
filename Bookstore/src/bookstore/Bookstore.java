@@ -15,7 +15,7 @@ public class Bookstore {
 	public static void main(String[] args) {
 	    BookService bookService = new BookService();
 		Scanner scanner = new Scanner(System.in);   
-		int option;
+		int option, bookId;
 		
 		/** p testar
 		bookService.addBook(new Textbook(bookService.idGenerator(), "Algoritmo 1", "autor 1", "123", "Computer Science", "MIT Press", 89.99f, 1111, "English", "Undergrads", "Advanced", "MIT"));
@@ -75,7 +75,9 @@ public class Bookstore {
 				        keyPress();
 				        break;
 			        case 5:
-			        	System.out.println("What's the book's id? ");			        	
+			        	System.out.println("What's the book's id? ");
+			        	bookId = scanner.nextInt();
+			        	bookService.deleteBook(bookId);
 			        	keyPress();
 			        	break;
 		    		default:
@@ -83,8 +85,6 @@ public class Bookstore {
 		    			keyPress();
 		    			break;
 				}
-				
-
 		}
 	}
 	
