@@ -61,7 +61,7 @@ public class Bookstore {
 			    case 1:
 			    	System.out.println("Select book type (1 for Textbook, 2 for Children Book): "); 
 			    	int bookType = scanner.nextInt(); 
-			    	Book newBook = createBook(bookType, bookService);
+			    	Book newBook = createBook(bookType, bookService, scanner);
 			    	if (newBook != null) {
 	    			    bookService.addBook(newBook);
 	    			}
@@ -75,7 +75,7 @@ public class Bookstore {
 	    			System.out.println("Enter the book ID to update: "); 
 	    			bookId = scanner.nextInt(); scanner.nextLine(); 
 	    			if(bookService.getBookById(bookId) != null) {
-		    			Book updatedBook = createBook(bookId, bookService);
+		    			Book updatedBook = createBook(bookId, bookService, scanner);
 		    			bookService.updateBook(bookId, updatedBook); 
 	    			} else {
 	    				System.out.println("\nBook not found.");
@@ -143,42 +143,41 @@ public class Bookstore {
 							results.forEach(book -> book.displayInfo(true)); 
 	}
 	
-	private static Book createBook(int bookType, BookService bookService) {
-	    Scanner scanner = new Scanner(System.in); 
+	private static Book createBook(int bookType, BookService bookService, Scanner scanner) {
 	    Book book = null;
 
 	    switch (bookType) {  
 	        case 1:
 	            book = new Textbook(
 	                bookService.idGenerator(),
-	                getInput("Enter the title:"),
-	                getInput("Enter the author:"),
-	                getInput("Enter the ISBN:"),
-	                getInput("Enter the genre:"),
-	                getInput("Enter the publisher:"),
-	                getFloatInput("Enter the price:"),
-	                getIntInput("Enter the page count:"),
-	                getInput("Enter the language:"),
-	                getInput("Enter the target audience (undergrads etc):"),
-	                getInput("Enter the level (beginner, intermediate etc):"),
-	                getInput("Enter the institution (university etc):")
+	                getInput("Enter the title:", scanner),
+	                getInput("Enter the author:", scanner),
+	                getInput("Enter the ISBN:", scanner),
+	                getInput("Enter the genre:", scanner),
+	                getInput("Enter the publisher:", scanner),
+	                getFloatInput("Enter the price:", scanner),
+	                getIntInput("Enter the page count:", scanner),
+	                getInput("Enter the language:", scanner),
+	                getInput("Enter the target audience (undergrads etc):", scanner),
+	                getInput("Enter the level (beginner, intermediate etc):", scanner),
+	                getInput("Enter the institution (university etc):", scanner)
 	            );
 	            break;
 	            
 	        case 2:
 	            book = new ChildrenBook(
             		bookService.idGenerator(),
-            		getInput("Enter the title:"),
-            		getInput("Enter the author:"),
-            		getInput("Enter the ISBN:"),
-            		getInput("Enter the genre:"),
-            		getInput("Enter the publisher:"),
-            		getFloatInput("Enter the price:"),
-            		getIntInput("Enter the page count:"),
-            		getInput("Enter the language:"),
-            		getInput("Enter the target audience (toddler, child etc):"),
-            		getInput("Enter the theme (friendship, adventure etc):"),
-            		getInput("Enter the learning objective (kindness, collaboration etc):")
+            		getInput("Enter the title:", scanner),
+            		getInput("Enter the author:", scanner),
+            		getInput("Enter the ISBN:", scanner),
+            		getInput("Enter the genre:", scanner),
+            		getInput("Enter the publisher:", scanner),
+            		getFloatInput("Enter the price:", scanner),
+            		getIntInput("Enter the page count:", scanner),
+            		getInput("Enter the language:", scanner),
+            		getInput("Enter the target audience (toddler, child etc):", scanner),
+            		getInput("Enter the theme (friendship, adventure etc):", scanner),
+            		getInput("Enter the learning objective (kindness, collaboration etc):", scanner)
                 );
 	            break;
 	        default: 
@@ -187,14 +186,12 @@ public class Bookstore {
 	    }
 	    return book;
 	}
-	private static String getInput(String prompt) { 
-		Scanner scanner = new Scanner(System.in);
+	private static String getInput(String prompt, Scanner scanner) { 
 		System.out.println(prompt); 
 		return scanner.nextLine();
 	}
 	
-	private static int getIntInput(String prompt) {
-	    Scanner scanner = new Scanner(System.in);
+	private static int getIntInput(String prompt, Scanner scanner) {
 		System.out.println(prompt);
 		while (!scanner.hasNextInt()) {
 		    System.out.println("Invalid input. Please enter a valid integer.");
@@ -203,8 +200,7 @@ public class Bookstore {
 		return scanner.nextInt();
 	}
 	
-	private static float getFloatInput(String prompt) {
-	   Scanner scanner = new Scanner(System.in);
+	private static float getFloatInput(String prompt, Scanner scanner) {
 		System.out.println(prompt);
 		while (!scanner.hasNextFloat()) {
 		    System.out.println("Invalid input. Please enter a valid float.");
