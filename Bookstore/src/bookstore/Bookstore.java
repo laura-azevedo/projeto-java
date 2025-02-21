@@ -32,59 +32,64 @@ public class Bookstore {
 **/
 		while (true) {
 			
-				System.out.println("Welcome to Laura's Book Store! Please, choose one of the options below: ");
-				System.out.println("1. Add a book");
-				System.out.println("2. Show list of books");
-				System.out.println("3. Update book information");
-				System.out.println("4. Search for a book");
-				System.out.println("5. Delete book");
-				System.out.println("6. Exit");
-				System.out.print("Choose an option: ");
+			System.out.println("Welcome to Laura's Book Store! Please, choose one of the options below: ");
+			System.out.println("1. Add a book");
+			System.out.println("2. Show list of books");
+			System.out.println("3. Update book information");
+			System.out.println("4. Search for a book");
+			System.out.println("5. Delete book");
+			System.out.println("6. Exit");
+			System.out.print("Choose an option: ");
+		
 			
-				
-				try {
-					option = scanner.nextInt();
-				} catch (InputMismatchException e) {
-					System.out.println("That's not a valid input! Please, type a number. ");
-					scanner.nextLine();
-					option = 0;
-		        } 
-				
-				if (option == 6) {
-					System.out.println("Goodbye!");
-					scanner.close();
-					System.exit(0);
-				}
+			try {
+				option = scanner.nextInt();
+			} catch (InputMismatchException e) {
+				System.out.println("That's not a valid input! Please, type a number. ");
+				scanner.nextLine();
+				option = 0;
+	        } 
+			
+			if (option == 6) {
+				System.out.println("Goodbye!");
+				scanner.close();
+				System.exit(0);
+			}
 				
 
-				switch (option) {
-				    case 1:
-				    	System.out.println("Adding book");
-				    	keyPress();
-				    	break;
-			    	case 2:
-			    		bookService.listAllBooks();
-			    		keyPress();
-			    		break;
-		    		case 3:
-		    			System.out.println("updating book.");
-		    			keyPress();
-		    			break;
-				    case 4:
-				    	bookSearch(scanner, bookService);
-				        keyPress();
-				        break;
-			        case 5:
-			        	System.out.println("What's the book's id? ");
-			        	bookId = scanner.nextInt();
-			        	bookService.deleteBook(bookId);
-			        	keyPress();
-			        	break;
-		    		default:
-		    			System.out.println("Invalid option, please try again.");
-		    			keyPress();
-		    			break;
-				}
+			switch (option) {
+			    case 1:
+			    	System.out.println("Select book type (1 for Textbook, 2 for Children Book): "); 
+			    	int bookType = scanner.nextInt(); 
+			    	Book newBook = createBook(bookType, bookService);
+			    	if (newBook != null) {
+	    			    bookService.addBook(newBook);
+	    			}
+			    	keyPress();
+			    	break;
+		    	case 2:
+		    		bookService.listAllBooks();
+		    		keyPress();
+		    		break;
+	    		case 3:
+	    			System.out.println("updating book.");
+	    			keyPress();
+	    			break;
+			    case 4:
+			    	bookSearch(scanner, bookService);
+	    			keyPress();
+	    			break;
+		        case 5:
+		        	System.out.println("What's the book's id? ");
+		        	bookId = scanner.nextInt();
+		        	bookService.deleteBook(bookId);
+		        	keyPress();
+		        	break;
+	    		default:
+	    			System.out.println("Invalid option, please try again.");
+	    			keyPress();
+	    			break;
+			}
 		}
 	}
 	
@@ -128,6 +133,77 @@ public class Bookstore {
 							System.out.println("No results.");
 						else 
 							results.forEach(book -> book.displayInfo(true)); 
+	}
+	
+	private static Book createBook(int bookType, BookService bookService) {
+	    Scanner scanner = new Scanner(System.in); 
+	    Book book = null;
+
+	    switch (bookType) {  
+	        case 1:
+	            book = new Textbook(
+	                bookService.idGenerator(),
+	                getInput("Enter the title:"),
+	                getInput("Enter the author:"),
+	                getInput("Enter the ISBN:"),
+	                getInput("Enter the genre:"),
+	                getInput("Enter the publisher:"),
+	                getFloatInput("Enter the price:"),
+	                getIntInput("Enter the page count:"),
+	                getInput("Enter the language:"),
+	                getInput("Enter the target audience (undergrads etc):"),
+	                getInput("Enter the level (beginner, intermediate etc):"),
+	                getInput("Enter the institution (university etc):")
+	            );
+	            break;
+	            
+	        case 2:
+	            book = new ChildrenBook(
+	            		bookService.idGenerator(),
+	            		getInput("Enter the title:"),
+	            		getInput("Enter the author:"),
+	            		getInput("Enter the ISBN:"),
+	            		getInput("Enter the genre:"),
+	            		getInput("Enter the publisher:"),
+	            		getFloatInput("Enter the price:"),
+	            		getIntInput("Enter the page count:"),
+	            		getInput("Enter the language:"),
+	            		getInput("Enter the target audience (toddler, child etc):"),
+	            		getInput("Enter the theme (friendship, adventure etc):"),
+	            		getInput("Enter the learning objective (kindness, collaboration etc):")
+	                );
+	                break;
+	        default: 
+	        	System.out.println("Invalid book type."); 
+	        	return null;
+	    }
+	    return book;
+	}
+	private static String getInput(String prompt) { 
+		Scanner scanner = new Scanner(System.in);
+		System.out.println(prompt); 
+		return scanner.nextLine();
+		
+	}
+	
+	private static int getIntInput(String prompt) {
+	    Scanner scanner = new Scanner(System.in);
+		System.out.println(prompt);
+		while (!scanner.hasNextInt()) {
+		    System.out.println("Invalid input. Please enter a valid integer.");
+		    scanner.next();
+		}
+		return scanner.nextInt();
+	}
+	
+	private static float getFloatInput(String prompt) {
+	   Scanner scanner = new Scanner(System.in);
+		System.out.println(prompt);
+		while (!scanner.hasNextFloat()) {
+		    System.out.println("Invalid input. Please enter a valid float.");
+		    scanner.next();
+		}
+		return scanner.nextFloat();
 	}
 	
 	public static void keyPress() {
